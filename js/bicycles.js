@@ -13,6 +13,7 @@ function downloadBicycles() {
 }
 
 function showBicycles(snap) {
+
     var data = snap.val();
 
     var rows = "";
@@ -21,11 +22,25 @@ function showBicycles(snap) {
             '<td>' + data[key].color + '</td>' +
             '<td>' + data[key].model + '</td>' +
             '<td>' + data[key].stock + '</td>' +
+            '<td><i class="fas fa-trash-alt delete" data-bicycle="' + key +  '"></i></td>' +
             '</tr>';
     }
 
     var myTBody = document.getElementById("my-tbody");
     myTBody.innerHTML = rows;
+
+    var deleteButtons = document.getElementsByClassName("delete");
+    for(var i = 0; i < deleteButtons.length; i++){
+        deleteButtons[i].addEventListener("click", deleteBicycle);
+    }
+}
+
+function deleteBicycle(event){
+    var buttonClicked = event.target;
+
+    var keyBicycleToDelete = buttonClicked.getAttribute("data-bicycle");
+    var refBicycleToDelete = firebase.database().ref("BicycleStore/bicycles/" + keyBicycleToDelete);
+    refBicycleToDelete.remove();
 }
 
 function initializeFirebase() {
