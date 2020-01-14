@@ -3,7 +3,29 @@ window.onload = initialize;
 function initialize() {
     initializeFirebase();
 
+    captureSubmitEventWhenAddingABicycle();
+
     downloadBicycles();
+}
+
+function captureSubmitEventWhenAddingABicycle(){
+    document.getElementById("form-bicycle").addEventListener("submit", addBicycle);
+}
+
+function addBicycle(event){
+    event.preventDefault();
+
+    var formBicycle = event.target;
+
+    var refBicycles = firebase.database().ref("BicycleStore/bicycles");
+
+    refBicycles.push({
+        color: formBicycle.color.value,
+        model: formBicycle.model.value,
+        stock: formBicycle.stock.value
+    });
+
+    formBicycle.reset();
 }
 
 function downloadBicycles() {
@@ -22,7 +44,10 @@ function showBicycles(snap) {
             '<td>' + data[key].color + '</td>' +
             '<td>' + data[key].model + '</td>' +
             '<td>' + data[key].stock + '</td>' +
-            '<td><i class="fas fa-trash-alt delete" data-bicycle="' + key +  '"></i></td>' +
+            '<td>' +
+                '<i class="fas fa-trash-alt delete" data-bicycle="' + key +  '"></i>' +
+                '<i class="fas fa-edit edit" data-bicycle="' + key +  '"></i>' +
+            '</td>' +
             '</tr>';
     }
 
@@ -54,7 +79,7 @@ function initializeFirebase() {
         messagingSenderId: "378131985655",
         appId: "1:378131985655:web:c4e5cb55c143bc835e0ff2",
         measurementId: "G-GV51RSZRN3"
-    };
+      };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 }
