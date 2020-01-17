@@ -30,6 +30,7 @@
     <script src="https://www.gstatic.com/firebasejs/7.6.2/firebase-database.js"></script>
 
     <script src="js/bicycles.js"></script>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -47,7 +48,9 @@
                 <label for="stock">Stock</label>
                 <input type="number" class="form-control" id="stock" name="stock">
             </div>
-            <button class="btn btn-primary" type="submit">Add</button>
+            <button id="add-button" class="btn btn-primary" type="submit">Add</button>
+            <button id="update-button" class="btn btn-primary" type="submit">Update</button>
+            <button id="cancel-button" class="btn btn-primary" type="reset">Cancel</button>
         </form>
         <table class="table table-striped">
             <thead>
@@ -55,7 +58,7 @@
                     <th>Color</th>
                     <th>Model</th>
                     <th>Stock</th>
-                    <th>Add/Delete/Update</th>
+                    <th>Delete/Update</th>
                 </tr>
             </thead>
             <tbody id="my-tbody">

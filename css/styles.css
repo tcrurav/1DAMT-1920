@@ -1,0 +1,13 @@
+.edit {
+    margin-left: 1em;
+}
+
+#update-button {
+    display: none;
+}
+
+#cancel-button {
+    margin-top: -2.4em;
+    margin-left: 5em;
+    display: none;
+}
